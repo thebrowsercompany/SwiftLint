@@ -3,12 +3,17 @@ import ArgumentParser
 import Darwin
 #elseif canImport(Glibc)
 import Glibc
+#elseif canImport(ucrt)
+import ucrt
 #else
 #error("Unsupported platform")
 #endif
 import Foundation
 import SwiftLintFramework
 import SwiftyTextTable
+#if os(Windows)
+import WinSDK
+#endif
 
 extension SwiftLint {
     struct Rules: ParsableCommand {
@@ -106,6 +111,13 @@ private extension TextTable {
 
 private struct Terminal {
     static func currentWidth() -> Int {
+#if os(Windows)
+        var csbi: CONSOLE_SCREEN_BUFFER_INFO = CONSOLE_SCREEN_BUFFER_INFO()
+        guard GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi) else {
+            return 80
+        }
+        return Int(csbi.srWindow.Right - csbi.srWindow.Left) + 1
+#else
         var size = winsize()
 #if os(Linux)
         _ = ioctl(CInt(STDOUT_FILENO), UInt(TIOCGWINSZ), &size)
@@ -113,5 +125,6 @@ private struct Terminal {
         _ = ioctl(STDOUT_FILENO, TIOCGWINSZ, &size)
 #endif
         return Int(size.ws_col)
+#endif
     }
 }
