@@ -21,10 +21,10 @@
     {
       "identity" : "sourcekitten",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/SourceKitten.git",
+      "location" : "https://github.com/thebrowsercompany/SourceKitten.git",
       "state" : {
-        "revision" : "b6dc09ee51dfb0c66e042d2328c017483a1a5d56",
-        "version" : "0.34.1"
+        "branch" : "compnerd/windows",
+        "revision" : "2c6791f5c92d5488a7e7d7c2632a357271a0f9b8"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/drmohundro/SWXMLHash.git",
       "state" : {
-        "revision" : "4d0f62f561458cbe1f732171e625f03195151b60",
-        "version" : "7.0.1"
+        "revision" : "a853604c9e9a83ad9954c7e3d2a565273982471f",
+        "version" : "7.0.2"
       }
     },
     {
